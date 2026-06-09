@@ -13,6 +13,11 @@ eventRouter.post("/create-event", protect, async (req, res) => {
       [event_name, description, event_date, event_time, req.user.id],
     );
 
+    await pool.query(
+      "UPDATE users SET event_count = event_count + 1 WHERE id = $1",
+      [req.user.id],
+    );
+
     res.status(201).json(newEvent.rows);
   } catch (error) {
     console.error(error);
@@ -21,11 +26,15 @@ eventRouter.post("/create-event", protect, async (req, res) => {
 
 eventRouter.delete("/delete-event", protect, async (req, res) => {
   try {
+    await pool.query(
+      "UPDATE users SET event_count = event_count + 1 WHERE id = $1",
+      [req.user.id],
+    );
+
     await pool.query("DELETE FROM events WHERE user_id = $1", [req.user.id]);
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 });
 
-
-export default eventRouter
+export default eventRouter;
