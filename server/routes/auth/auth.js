@@ -5,7 +5,7 @@ import { pool } from "../../config/db.js"
 import cookieParser from "cookie-parser"
 import { protect } from '../../middleware/protect.js'
 
-const router = express.Router();
+const authRouter = express.Router();
 
 const cookieOptions = {
 	httpOnly: true, 
@@ -20,7 +20,7 @@ const generateToken = (id) => {
 	});
 }
 
-router.post('/register', async (req, res) => {
+authRouter.post('/register', async (req, res) => {
 	const {name, email, event_count, password} = req.body; //event_count starts on 0
 	
 	if(!name || !email || !password){
@@ -44,7 +44,7 @@ router.post('/register', async (req, res) => {
 	return res.status(201).json({user: newUser.rows[0]});
 })
 
-router.post('/login', async(req, res) => {
+authRouter.post('/login', async(req, res) => {
 	const { email, password } = req.body;
 	
 	if (!email || !password) {
@@ -79,13 +79,13 @@ router.post('/login', async(req, res) => {
 	});
 })
 
-router.get('/me', protect, async (req, res) => {
+authRouter.get('/me', protect, async (req, res) => {
 	res.json(req.user);
 })
 
-router.post('/logout', (req,res) => {
+authRouter.post('/logout', (req,res) => {
 	res.cookie('token', '', {...cookieOptions, maxAge: 1}); 
 	res.json({message: "Logged out successfully."});
 })
 
-export default router
+export default authRouter

@@ -3,6 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv"
 import authRoutes from "./routes/auth/auth.js"
+import eventRoutes from "./routes/event/event.js"
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ app.use(cors({
 app.use(express.json()) 
 app.use(cookieParser()) 
 app.use("/api/auth", authRoutes)
-
+app.use("/event", eventRoutes)
 
 app.listen(5000, () => {
   console.log("Hi")
