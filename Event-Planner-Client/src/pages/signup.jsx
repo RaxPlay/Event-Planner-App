@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Signup = ({setUser}) => {
-  const navigate = useNavigate()
+export const Signup = ({ setUser }) => {
+  const navigate = useNavigate();
   const [signupForm, setSignupForm] = useState({
     username: "",
     email: "",
@@ -11,57 +11,61 @@ export const Signup = ({setUser}) => {
     password: "",
   });
 
-  const signupFunc = async(e) => {
+  const signupFunc = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/auth/signup", signupForm)
+      const res = await axios.post("/api/auth/signup", signupForm);
       setUser(res.data.user);
-      navigate("/home")
+      navigate("/home");
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   return (
     <>
-      <form id="container" onSubmit={signupFunc}>
-        <h2>Please signup</h2>
+      <div className="flex justify-center">
+        <form id="container" onSubmit={signupFunc}>
+          <h2>Please Sign-up</h2>
 
-        <input
-          type="text"
-          placeholder="User Name"
-          value={signupForm.username}
-          onChange={(e) => {
-            setSignupForm({ ...signupForm, username: e.target.value });
-          }}
-        />
-
-        <div>
           <input
-            type="email"
-            placeholder="Email"
-            value={signupForm.email}
+            type="text"
+            placeholder="User Name"
+            value={signupForm.username}
             onChange={(e) => {
-              setSignupForm({ ...signupForm, email: e.target.value });
+              setSignupForm({ ...signupForm, username: e.target.value });
             }}
-          />
-        </div>
-        
-        <div>
-          <input
-            type="password"
-            placeholder="Password"
-            value={signupForm.password}
-            onChange={(e) => {
-              setSignupForm({ ...signupForm, password: e.target.value });
-            }}
+            className="mt-3"
           />
 
-          <button id="submitButton" onClick={signupFunc}>
-            <i className="fa-solid fa-arrow-up"></i>
-          </button>
-        </div>
-      </form>
+          <div className="mt-2">
+            <input
+              type="email"
+              placeholder="Email"
+              value={signupForm.email}
+              onChange={(e) => {
+                setSignupForm({ ...signupForm, email: e.target.value });
+              }}
+            />
+          </div>
+
+          <div className="flex justify-center gap-1 mt-2">
+            <input
+              type="password"
+              placeholder="Password"
+              value={signupForm.password}
+              onChange={(e) => {
+                setSignupForm({ ...signupForm, password: e.target.value });
+              }}
+              className="password-input"
+            />
+
+            <button id="form-button" onClick={signupFunc}>
+              <i className="fa-solid fa-arrow-up"></i>
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
-}
+};

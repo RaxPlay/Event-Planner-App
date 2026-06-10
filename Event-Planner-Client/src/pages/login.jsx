@@ -22,8 +22,9 @@ export const Login = ({setUser}) => {
 
   return (
     <>
+    <div className="flex justify-center">
       <form id="container" onSubmit={loginFunc}>
-        <h2>Please Login</h2>
+        <h2>Please Log-in</h2>
 
         <input
           type="email"
@@ -32,9 +33,10 @@ export const Login = ({setUser}) => {
           onChange={(e) => {
             setLoginForm({ ...loginForm, email: e.target.value });
           }}
+          className="mt-3"
         />
 
-        <div>
+        <div className="flex justify-center gap-1 mt-2">
           <input
             type="password"
             placeholder="Password"
@@ -42,13 +44,15 @@ export const Login = ({setUser}) => {
             onChange={(e) => {
               setLoginForm({ ...loginForm, password: e.target.value });
             }}
+            className="password-input"
           />
 
-          <button id="submitButton" onClick={loginFunc}>
+          <button id="form-button" onClick={loginFunc}>
             <i className="fa-solid fa-arrow-up"></i>
           </button>
         </div>
       </form>
+    </div>
     </>
   );
 };
