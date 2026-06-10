@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({setUser}) => {
+  const navigate = useNavigate()
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
 
+  const loginFunc = async(e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/api/auth/login", loginForm)
+      setUser(res.data.user);
+      navigate("/home")
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <>
-      <form id="container">
+      <form id="container" onSubmit={loginFunc}>
         <h2>Please Login</h2>
 
         <input
@@ -31,8 +44,8 @@ export const Login = () => {
             }}
           />
 
-          <button>
-            
+          <button id="submitButton" onClick={loginFunc}>
+            <i className="fa-solid fa-arrow-up"></i>
           </button>
         </div>
       </form>
