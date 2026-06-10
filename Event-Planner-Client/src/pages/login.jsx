@@ -22,7 +22,7 @@ export const Login = ({setUser}) => {
 
   return (
     <>
-    <div className="flex justify-center">
+    <div className="flex justify-center h-[60vh] items-center">
       <form id="container" onSubmit={loginFunc}>
         <h2>Please Log-in</h2>
 
