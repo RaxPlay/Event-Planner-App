@@ -1,7 +1,15 @@
 import React from 'react'
 
-export const Home = () => {
+export const Home = ({user}) => {
   return (
-    <div>home</div>
+    <div>
+      { user ? (
+        <div>
+          Welcome {user.username}
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </div>
   )
 }
