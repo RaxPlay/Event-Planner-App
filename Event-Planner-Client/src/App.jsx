@@ -46,7 +46,7 @@ export const App = () => {
         <Route path="/home" element={<Home user={user}/>}/>
         <Route path="/login" element={<Login setUser={setUser}/>}/>
         <Route path="/sign-up" element={<Signup setUser={setUser}/>}/>
-        <Route path="/events" element={<Events user={user}/>}></Route>
+        <Route path="/saved-events" element={<Events user={user}/>}></Route>
         <Route path="/*" element={<Navigate to="/home"/>}/>
       </Routes>
     </Router>

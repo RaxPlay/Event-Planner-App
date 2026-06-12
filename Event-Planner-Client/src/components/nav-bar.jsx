@@ -21,7 +21,7 @@ export const NavBar = ({ user, setUser }) => {
             <i className="fa-solid fa-home"></i>
           </Link>
 
-          <Link to="/events" className="flex items-center">
+          <Link to="/saved-events" className="flex items-center">
             <i className="fa-regular fa-calendar"></i>
           </Link>
 

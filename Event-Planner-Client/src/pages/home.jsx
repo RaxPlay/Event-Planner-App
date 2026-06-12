@@ -1,30 +1,30 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 export const Home = ({ user }) => {
+  const navigate = useNavigate();
   const [eventForm, setEventForm] = useState({
     event_name: "",
     description: "",
     event_date: "",
     event_time: "",
   });
-  const [displayEvent, setDisplayEvent] = useState([]);
 
   const newEvent = async (e) => {
     e.preventDefault();
     try {
       if (
         eventForm.event_name === "" ||
-        eventForm.description === "" ||
         eventForm.event_date === "" ||
         eventForm.event_time === ""
       ) {
         return alert("All inputs are required!");
       }
 
-      const res = await axios.post("/event/create-event", eventForm);
-      setDisplayEvent(res.data);
+      await axios.post("/event/create-event", eventForm);
       alert(`Event added to your calendar!`);
+      navigate("/saved-events");
     } catch (error) {
       console.error(error);
     }
@@ -57,7 +57,7 @@ export const Home = ({ user }) => {
               <div className="mt-3">
                 <input
                   type="text"
-                  placeholder="Event Description"
+                  placeholder="Description (optional)"
                   value={eventForm.description}
                   onChange={(e) => {
                     setEventForm({ ...eventForm, description: e.target.value });
@@ -77,7 +77,7 @@ export const Home = ({ user }) => {
                 />
               </div>
 
-              <div className="flex justify-center gap-1 mt-3">
+              <div className="flex justify-center gap-2 mt-3">
                 <input
                   type="time"
                   placeholder="1:30 AM"
@@ -97,7 +97,21 @@ export const Home = ({ user }) => {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div className="flex justify-center">
+          <div id="container" className="mt-20">
+            <h2>
+              Please{" "}
+              <Link to="/login" className="hover:underline">
+                Login
+              </Link>{" "}
+              or{" "}
+              <Link to="/sign-up" className="hover:underline">
+                Sign-up
+              </Link>{" "}
+              First
+            </h2>
+          </div>
+        </div>
       )}
     </div>
   );

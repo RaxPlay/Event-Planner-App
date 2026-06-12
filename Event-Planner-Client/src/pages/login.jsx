@@ -22,8 +22,8 @@ export const Login = ({setUser}) => {
 
   return (
     <>
-    <div className="flex justify-center h-[60vh] items-center">
-      <form id="container" onSubmit={loginFunc}>
+    <div className="flex justify-center">
+      <form id="container" onSubmit={loginFunc} className="mt-20">
         <h2>Please Log-in</h2>
 
         <input
@@ -36,7 +36,7 @@ export const Login = ({setUser}) => {
           className="mt-3"
         />
 
-        <div className="flex justify-center gap-1 mt-2">
+        <div className="flex justify-center gap-2 mt-2">
           <input
             type="password"
             placeholder="Password"

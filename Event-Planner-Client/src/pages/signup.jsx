@@ -19,13 +19,13 @@ export const Signup = ({ setUser }) => {
       navigate("/home");
     } catch (error) {
       console.error(error);
-    }
+    } 
   };
 
   return (
     <>
-      <div className="flex justify-center h-[60vh] items-center">
-        <form id="container" onSubmit={signupFunc}>
+      <div className="flex justify-center">
+        <form id="container" onSubmit={signupFunc} className="mt-20">
           <h2>Please Sign-up</h2>
 
           <input
@@ -35,6 +35,7 @@ export const Signup = ({ setUser }) => {
             onChange={(e) => {
               setSignupForm({ ...signupForm, username: e.target.value });
             }}
+
             className="mt-3"
           />
 
@@ -49,7 +50,7 @@ export const Signup = ({ setUser }) => {
             />
           </div>
 
-          <div className="flex justify-center gap-1 mt-2">
+          <div className="flex justify-center gap-2 mt-2">
             <input
               type="password"
               placeholder="Password"

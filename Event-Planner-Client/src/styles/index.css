@@ -2,7 +2,10 @@
 
 :root {
   --background-color: linear-gradient(to bottom right, #101419, #323c48);
-  --container-bg-color: #606b65;
+  --event-bg-color: linear-gradient(to bottom right, #323c48, #252d37);
+  --bad-button-color: #984140;
+  --bad-button-hover-color: #ad4d4c; 
+  --container-bg-color: linear-gradient(to bottom right, #323c48, #252d37);
   --border-color: #969897;
   --text-color: #d8d4d4;
 }
@@ -10,7 +13,7 @@
 body {
   height: 100vh;
   background: var(--background-color);
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
 h1{
@@ -24,8 +27,12 @@ h2{
 input{
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  width: 200px;
+  width: 240px;
   padding: 2px 5px;
+}
+
+input:focus {
+  outline:none;
 }
 
 i{
@@ -35,11 +42,29 @@ i{
 #container{
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  background-color: var(--container-bg-color);
+  background: var(--container-bg-color);
   text-align: center;
   padding: 20px 10px 30px;
-  min-width: 300px;
+  min-width: 280px;
   width: 600px;
+}
+
+#events-container{
+  width: 55%;
+  display: grid; 
+  grid-template-columns: 50% 50%;
+  gap: 50px;
+  padding: 20px ;
+}
+
+#event{
+  border: 1px solid var(--border-color);
+  background: var(--event-bg-color);
+  height: fit-content;
+  width: 400px;
+  min-width: 250px;
+  border-radius: 6px;
+  padding: 20px;
 }
 
 #form-button{
@@ -55,16 +80,35 @@ i{
 }
 
 #nav-bar{
-  background-color: var(--container-bg-color);
+  background: var(--container-bg-color);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
   width: 500px;
-  min-width: 250px;
+  min-width: 280px;
   padding: 15px 80px;
 }
 
 .password-input, .time-input{
-  width: 163px;
+  width: 199px;
+}
+
+.delete-button{
+  color: var(--bad-button-color);
+  transition: 0.3s;
+}
+
+.delete-button:hover{
+  color: var(--bad-button-hover-color);
+}
+
+/*
+  Media queries
+*/
+
+@media (width <= 1000px) {
+  #events-container{
+    grid-template-rows: 100%;
+  }
 }
