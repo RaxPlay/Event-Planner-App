@@ -24,13 +24,47 @@ eventRouter.post("/create-event", protect, async (req, res) => {
   }
 });
 
-eventRouter.get("/get-events", protect, async(req, res) => {
+eventRouter.put("/edit-event/:event_id", protect, async (req, res) => {
   try {
-    const events = await pool.query("SELECT event_id, event_name, description, event_date, event_time FROM events WHERE user_id = $1", [req.user.id]);
+    const { event_id } = req.params;
+    const { event_name, description, event_date, event_time } = req.body;
+
+    const editedEvent = await pool.query(
+      "UPDATE events SET event_name = $1, description = $2, event_date = $3, event_time = $4 WHERE event_id = $5",
+      [event_name, description, event_date, event_time, event_id],
+    );
+
+    res.status(201).json(editedEvent.rows)
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+eventRouter.get("/get-events", protect, async (req, res) => {
+  try {
+    const events = await pool.query(
+      "SELECT event_id, event_name, description, event_date, event_time FROM events WHERE user_id = $1",
+      [req.user.id],
+    );
 
     res.status(200).json(events.rows);
   } catch (error) {
-    console.log(error)
+    console.log(error);
+  }
+});
+
+eventRouter.get("/get-event/:event_id", protect, async(req, res) => {
+  try {
+    const {event_id} = req.params;
+
+    const event = await pool.query(
+      "SELECT event_id, event_name, description, event_date, event_time FROM events WHERE event_id = $1",
+      [event_id],
+    );
+
+    res.status(200).json(event.rows[0]);
+  } catch (error) {
+    console.error(error)
   }
 })
 

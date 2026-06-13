@@ -12,6 +12,7 @@ import { Signup } from "./pages/signup";
 import { NavBar } from "./components/nav-bar";
 import { Home } from "./pages/home";
 import { Events } from "./pages/events";
+import { EditEvent } from "./pages/edit-event";
 
 axios.defaults.withCredentials = true;
 
@@ -47,6 +48,7 @@ export const App = () => {
         <Route path="/login" element={<Login setUser={setUser}/>}/>
         <Route path="/sign-up" element={<Signup setUser={setUser}/>}/>
         <Route path="/saved-events" element={<Events user={user}/>}></Route>
+        <Route path="/edit-event/:eventId" element={<EditEvent/>}></Route>
         <Route path="/*" element={<Navigate to="/home"/>}/>
       </Routes>
     </Router>

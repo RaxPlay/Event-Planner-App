@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const Events = ({ user }) => {
   const [eventDisplay, setEventDisplay] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUserEvents = async () => {
@@ -39,16 +40,25 @@ export const Events = ({ user }) => {
             <p className="mt-1">
               {event.event_date.substr(0, 10)}, {event.event_time.substr(0, 5)}
             </p>
-            <div id="event-buttons-container" className="mt-5">
-              <button
-                onClick={() => deleteEvent(event.event_id)}
-                className="delete-button"
-              >
-                <i className="fa-solid fa-trash"></i>
-              </button>
+            <div className="flex justify-center">
+              <div className="mt-5 flex justify-between w-30">
+                <button
+                  onClick={() => deleteEvent(event.event_id)}
+                  className="delete-button"
+                >
+                  <i className="fa-solid fa-trash"></i>
+                </button>
+                
+                <button className="edit-button" onClick={()=>{navigate(`/edit-event/${event.event_id}`)}}>
+                  <i className="fa-regular fa-pen-to-square"></i>
+                </button>
+              </div>
+
             </div>
           </div>
         ))}
+
+                
       </div>
     </div>
   );

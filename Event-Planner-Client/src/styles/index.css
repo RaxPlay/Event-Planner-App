@@ -5,6 +5,8 @@
   --event-bg-color: linear-gradient(to bottom right, #323c48, #252d37);
   --bad-button-color: #984140;
   --bad-button-hover-color: #ad4d4c; 
+  --good-button-color: #347064;
+  --good-button-hover-color: #458679; 
   --container-bg-color: linear-gradient(to bottom right, #323c48, #252d37);
   --border-color: #969897;
   --text-color: #d8d4d4;
@@ -28,6 +30,7 @@ input{
   border: 1px solid var(--border-color);
   border-radius: 6px;
   width: 240px;
+  min-width: 100px;
   padding: 2px 5px;
 }
 
@@ -55,6 +58,27 @@ i{
   grid-template-columns: 50% 50%;
   gap: 50px;
   padding: 20px ;
+}
+
+#modal{
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+}
+
+#modal-content{
+  background:var(--container-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin: 15% auto; 
+  padding: 10px 14px;
+  width: 600px;
+  min-width: 250px;  
+  height: fit-content;
 }
 
 #event{
@@ -94,12 +118,21 @@ i{
   width: 199px;
 }
 
-.delete-button{
+.edit-button{
+  color: var(--good-button-color);
+  transition: 0.3s;
+}
+
+.edit-button:hover{
+  color: var(--good-button-hover-color);
+}
+
+.delete-button, .close-modal-button{
   color: var(--bad-button-color);
   transition: 0.3s;
 }
 
-.delete-button:hover{
+.delete-button:hover, .close-modal-button:hover{
   color: var(--bad-button-hover-color);
 }
 
