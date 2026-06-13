@@ -6,7 +6,6 @@ import { useParams, useNavigate } from "react-router-dom";
 export const EditEvent = () => {
   const navigate = useNavigate();
   const { eventId } = useParams();
-  const [oldEventInfo, setOldEventInfo] = useState({});
   const [editEventForm, setEditEventForm] = useState({
     event_name: ``,
     description: ``,
