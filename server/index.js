@@ -18,6 +18,4 @@ app.use(cookieParser())
 app.use("/api/auth", authRoutes)
 app.use("/event", eventRoutes)
 
-app.listen(5000, () => {
-  console.log("Hi")
-})
+app.listen(5000)

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./styles/index.css"
+import "./styles/index.css";
+import loading from "./assets/loading.mp4";
 import {
   BrowserRouter as Router,
   Route,
@@ -20,23 +21,26 @@ export const App = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(()=>{
-    const getUser = async() => {
+  useEffect(() => {
+    const getUser = async () => {
       try {
         const fetchedUser = await axios.get("api/auth/me");
         setUser(fetchedUser.data);
       } catch (error) {
-        setUser(null)
+        setUser(null);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
     getUser();
-  },[])
+  }, []);
 
-  if(isLoading){
-    return <div className="text-center">Loading</div>
-    //Will change this later for a gif
+  if (isLoading) {
+    return (
+      <div className="flex justify-center">
+        <video src={loading} loop muted autoPlay alt="Loading..."></video>
+      </div>
+    );
   }
 
   return (
@@ -44,12 +48,12 @@ export const App = () => {
       <NavBar user={user} setUser={setUser}></NavBar>
 
       <Routes>
-        <Route path="/home" element={<Home user={user}/>}/>
-        <Route path="/login" element={<Login setUser={setUser}/>}/>
-        <Route path="/sign-up" element={<Signup setUser={setUser}/>}/>
-        <Route path="/saved-events" element={<Events user={user}/>}></Route>
-        <Route path="/edit-event/:eventId" element={<EditEvent/>}></Route>
-        <Route path="/*" element={<Navigate to="/home"/>}/>
+        <Route path="/home" element={<Home user={user} />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/sign-up" element={<Signup setUser={setUser} />} />
+        <Route path="/saved-events" element={<Events user={user} />}></Route>
+        <Route path="/edit-event/:eventId" element={<EditEvent />}></Route>
+        <Route path="/*" element={<Navigate to="/home" />} />
       </Routes>
     </Router>
   );
